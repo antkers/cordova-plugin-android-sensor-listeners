@@ -138,7 +138,7 @@ public class Sensors extends CordovaPlugin {
             // try to get the value in microseconds
             try {
               samplingPeriodUs = Integer.parseInt(samplingPeriodName);
-            } catch (Exception e) {
+            } catch (Exception eIntParse) {
               callbackContext.error("Unavailable sampling period: " + samplingPeriodName);
               return;
             }
