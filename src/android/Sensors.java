@@ -135,8 +135,13 @@ public class Sensors extends CordovaPlugin {
                     .getDeclaredField("SENSOR_DELAY_" + samplingPeriodName)
                     .getInt(SensorManager.class);
         } catch (NoSuchFieldException e) {
-            callbackContext.error("Unavailable sampling period: " + samplingPeriodName);
-            return;
+            // try to get the value in microseconds
+            try {
+              samplingPeriodUs = Integer.parseInt(samplingPeriodName);
+            } catch (Exception e) {
+              callbackContext.error("Unavailable sampling period: " + samplingPeriodName);
+              return;
+            }
         } catch (IllegalAccessException e) {
             callbackContext.error("Unavailable sampling period: " + samplingPeriodName);
             return;
